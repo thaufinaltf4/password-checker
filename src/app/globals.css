@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ──────────────────────────────────────────── */
+:root {
+  --c-base: #070a0f;
+  --c-panel: #0c1018;
+  --c-edge: #192030;
+  --c-accent: #a97bff;
+  --c-danger: #ff3366;
+  --c-safe: #00cc6a;
+  --c-warn: #ffad00;
+  --c-ink: #c8d4e8;
+  --c-ink-muted: #546280;
+  --c-ink-dim: #2d3850;
+}
+
+/* ─── Base ───────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--c-base);
+  color: var(--c-ink);
+}
+
+body {
+  font-family: var(--font-sans), sans-serif;
+  background-color: var(--c-base);
+  color: var(--c-ink);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Dot Grid Background ────────────────────────────────────── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    rgba(0, 205, 183, 0.07) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Subtle vignette to pull edges into darkness */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    transparent 40%,
+    rgba(7, 10, 15, 0.7) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+header,
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Typography Helpers ─────────────────────────────────────── */
+.eyebrow {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-ink-muted);
+}
+
+/* ─── Animations ─────────────────────────────────────────────── */
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-reveal {
+  animation: fade-slide-up 0.4s ease backwards;
+}
+
+.animate-blink {
+  animation: blink-pulse 1.4s ease-in-out infinite;
+}
